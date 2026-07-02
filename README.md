@@ -1,6 +1,52 @@
 # Sistema-de-Monitoramento
 
-Exercicio integrador de Programacao Orientada a Objetos: Central de Alertas.
+Repositorio do exercicio integrador de Programacao Orientada a Objetos
+(POO 2026.1): **Central de Alertas**.
+
+O projeto consiste em um sistema simples de monitoramento que registra e exibe
+alertas de diferentes tipos. A implementacao exercita os conceitos pedidos no
+enunciado: interface pura, classe abstrata, heranca, `override`, `final`,
+Template Method e polimorfismo dinamico com
+`std::vector<std::unique_ptr<alerta>>`.
+
+## Organizacao do projeto
+
+```text
+.
+|-- CMakeLists.txt
+|-- README.md
+|-- alerta.hpp
+|-- alerta.cpp
+|-- central.hpp
+|-- central.cpp
+|-- main.cpp
+|-- tests/
+|   `-- test_alertas.cpp
+`-- alertas/
+    |-- alerta_critico.hpp
+    |-- alerta_critico.cpp
+    |-- alerta_aviso.hpp
+    |-- alerta_aviso.cpp
+    |-- alerta_info.hpp
+    |-- alerta_info.cpp
+    |-- alerta_debug.hpp
+    `-- alerta_debug.cpp
+```
+
+### Responsabilidades principais
+
+- `alerta.hpp` / `alerta.cpp`: definem a interface pura `formatavel` e a classe
+  abstrata `alerta`, que concentra o estado comum e o Template Method `exibir()`.
+- `alertas/`: reune as classes concretas de alerta (`alerta_critico`,
+  `alerta_aviso`, `alerta_info`) e o desafio opcional `alerta_debug`.
+- `central.hpp` / `central.cpp`: implementam a central que armazena os alertas
+  usando `std::vector<std::unique_ptr<alerta>>`, evitando `new/delete` crus e
+  object slicing.
+- `main.cpp`: demonstra o uso da central, registra alertas e imprime a saida
+  esperada.
+- `tests/test_alertas.cpp`: verifica os principais comportamentos das classes
+  sem depender de bibliotecas externas de teste.
+- `CMakeLists.txt`: configura a compilacao do projeto em C++17.
 
 ## Build
 
